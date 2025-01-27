@@ -6,7 +6,10 @@ import java.time.LocalDate;
 public class UtilidadesFactura {
 
     public boolean esFacturaVencida(Factura factura){
-        return LocalDate.now().isBefore(factura.getFechaVencimiento());
+
+        return factura.getFechaVencimiento().isAfter(LocalDate.now())
+        ||
+        factura.getFechaVencimiento().isEqual(LocalDate.now());
     }
 
     public double calcularBaseFactura(Factura factura) {
