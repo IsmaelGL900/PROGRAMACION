@@ -3,10 +3,9 @@ package utilidades;
 import modelos.Empleado;
 import modelos.Empresa;
 import modelos.TipoContrato;
+import modelos.TipoEmpresa;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class UtilidadesEmpresa {
     public List<Empleado> getEmpleadosPorContrato(Empresa empresa, TipoContrato tipoContrato) {
@@ -53,5 +52,35 @@ public class UtilidadesEmpresa {
         }
         empleados.sort(Comparator.comparing (empleado -> empleado.getContrato().getSalarioBase()));
         return empleados.get(0);
+    }
+
+    /*V4 3.A*/
+    public Map<TipoEmpresa, Integer> getNumEmpresasPorTipo(List<Empresa> empresas) {
+        Map<TipoEmpresa, Integer> numEmpresasPorTipo = new HashMap<TipoEmpresa, Integer>();
+
+        for (Empresa empresa : empresas) {
+            TipoEmpresa tipoEmpresa = empresa.getTipoEmpresa();
+            if (numEmpresasPorTipo.containsKey(tipoEmpresa)) {
+                numEmpresasPorTipo.put(tipoEmpresa, numEmpresasPorTipo.get(tipoEmpresa) + 1);
+            } else {
+                numEmpresasPorTipo.put(tipoEmpresa, 1);
+            }
+
+        }
+        return numEmpresasPorTipo;
+    }
+
+    /*V4 3.B*/
+    public Map<TipoEmpresa,Integer> getNumEmpleadosPorTipoEmpresa(List<Empresa> empresa) {
+        Map<TipoEmpresa, Integer> numEmpleadosPorTipo = new HashMap<>();
+
+        for (Empresa empresas : empresa) {
+            TipoEmpresa tipoempresa = empresas.getTipoEmpresa();
+            int numEmpleados = empresas.getEmpleados().size();
+            empresas.getEmpleados().size();
+            numEmpleadosPorTipo.put(tipoempresa, numEmpleadosPorTipo.getOrDefault(tipoempresa, 0) + numEmpleados);
+        }
+
+        return numEmpleadosPorTipo;
     }
 }
