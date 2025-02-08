@@ -1,7 +1,6 @@
 package utilidades;
 
-import modelos.Contrato;
-import modelos.TipoContrato;
+import modelos.*;
 
 import java.util.*;
 
@@ -47,6 +46,9 @@ public class UtilidadesContrato {
         }
         return listContratosPorTipo;
     }
+
+    /*V5 4.A*/
+
 
 
 }

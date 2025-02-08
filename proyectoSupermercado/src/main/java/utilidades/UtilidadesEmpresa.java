@@ -70,7 +70,7 @@ public class UtilidadesEmpresa {
         return numEmpresasPorTipo;
     }
 
-    /*V4 3.B*/
+    /*V4 3.B & V5 3.C*/
     public Map<TipoEmpresa,Integer> getNumEmpleadosPorTipoEmpresa(List<Empresa> empresa) {
         Map<TipoEmpresa, Integer> numEmpleadosPorTipo = new HashMap<>();
 
@@ -83,4 +83,41 @@ public class UtilidadesEmpresa {
 
         return numEmpleadosPorTipo;
     }
+
+    /*V5 2.A*/
+    public List<Empleado> getEmpleadosPymePracticas(List<Empresa> empresas) {
+        List<Empleado> empleadosPyme = new ArrayList<>();
+
+        for (Empresa empresa : empresas) {
+            if (empresa.getTipoEmpresa() == TipoEmpresa.valueOf("PYME")) {
+                for (Empleado empleado : empresa.getEmpleados()) {
+                    if (empleado.getContrato().getTipoContrato() == TipoContrato.valueOf("PRACTICAS")) {
+                        empleadosPyme.add(empleado);
+                    }
+                }
+            }
+        }
+        return empleadosPyme;
+    }
+
+    /*V5 2.B*/
+    public Map<Empresa,Empleado> getLosMejorPagadosPorEmpresa(List<Empresa> empresas) {
+        Map<Empresa,Empleado> losMejorPagados = new HashMap<>();
+
+        for (Empresa empresa : empresas) {
+            Empleado mejorpagado = null;
+            for (Empleado empleado : empresa.getEmpleados()) {
+                if (mejorpagado == null || empleado.getContrato().getSalarioBase() > mejorpagado.getContrato().getSalarioBase()) {
+                    mejorpagado = empleado;
+                }
+            }
+
+            if (mejorpagado != null) {
+                losMejorPagados.put(empresa, mejorpagado);
+            }
+        }
+        return losMejorPagados;
+    }
+
+
 }
