@@ -50,6 +50,8 @@ public class UtilidadesColegio {
         for (Alumno alumno : colegio.getAlumnos()) {
             if (alumnotipocurso.containsKey(alumno.getTipoCurso())) {
                 alumnotipocurso.get(alumno.getTipoCurso()).add(alumno);
+            } else {
+                alumnotipocurso.put(alumno.getTipoCurso(), new ArrayList<>(List.of(alumno)));
             }
         }
         return alumnotipocurso;
