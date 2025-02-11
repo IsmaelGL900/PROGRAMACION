@@ -24,7 +24,8 @@ public class UtilidadesColegio {
     public static List<Alumno> mayoresEdad(Colegio colegio) {
         List<Alumno> alumnosmayores = new ArrayList<Alumno>();
         for (Alumno alumno : colegio.getAlumnos()) {
-            if (ChronoUnit.YEARS.between(alumno.getFechaNacimiento(), LocalDate.now()) >= 18 || alumno.getTipoCurso() == TipoCurso.CICLOS) {
+            /*Tambien con Period.between valia*/
+            if (ChronoUnit.YEARS.between(alumno.getFechaNacimiento(), LocalDate.now()) >= 18 && alumno.getTipoCurso() == TipoCurso.CICLOS) {
                 alumnosmayores.add(alumno);
             }
         }
@@ -35,11 +36,8 @@ public class UtilidadesColegio {
         Map<Colegio, Integer> totalAlumnos = new HashMap<Colegio, Integer>();
 
         for (Colegio colegio : colegios) {
-            if (totalAlumnos.containsKey(colegio)) {
-                totalAlumnos.put(colegio, totalAlumnos.get(colegio) + 1);
-            } else {
-                totalAlumnos.put(colegio, 1);
-            }
+            int numeroAlumnos = colegio.getAlumnos().size();
+            totalAlumnos.put(colegio, numeroAlumnos);
         }
         return totalAlumnos;
     }
