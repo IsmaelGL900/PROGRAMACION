@@ -34,6 +34,41 @@ public class UtilidadesPersonaje {
         return personajesPorRegion;
     }
 
+    public Personaje getMasPoderoso(List<Personaje> personaje) {
+        Personaje personajemaspoderoso = null;
+        double maxsumaestadisticas = 0.0;
+
+        for (Personaje p : personaje) {
+            p.setNivel(17);
+            levelUp(p);
+            double sumaestadistica = p.getVida() + p.getAtaque() + p.getDefensa() + p.getMana();
+
+            if ( sumaestadistica > maxsumaestadisticas) {
+                maxsumaestadisticas = sumaestadistica;
+                personajemaspoderoso = p;
+            }
+
+        }
+        return personajemaspoderoso;
+    }
+
+    public Map<Region, List<Personaje>> getMasPoderosoPorRegion(List<Personaje> personajes) {
+        Map<Region, List<Personaje>> maxpersonajesPorRegion = new HashMap<>();
+
+        for (Personaje p : personajes) {
+            if (maxpersonajesPorRegion.containsKey(p.getRegion())) {
+                maxpersonajesPorRegion.get(p.getRegion()).add(p);
+            } else {
+                maxpersonajesPorRegion.put(p.getRegion(), new ArrayList<>(List.of(p)));
+            }
+        }
+
+        for (Region r : maxpersonajesPorRegion.keySet()) {
+            getMasPoderoso(maxpersonajesPorRegion.get(r));
+        }
+        return maxpersonajesPorRegion;
+    }
+
 
 
 }
