@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class UtilidadesPersonaje {
 
-    public Personaje levelUp(Personaje personaje) {
+    public static Personaje levelUp(Personaje personaje) {
         personaje.setNivel(personaje.getNivel() + 1);
 
         int nivel = personaje.getNivel();
@@ -43,7 +43,7 @@ public class UtilidadesPersonaje {
             levelUp(p);
             double sumaestadistica = p.getVida() + p.getAtaque() + p.getDefensa() + p.getMana();
 
-            if ( sumaestadistica > maxsumaestadisticas) {
+            if (sumaestadistica > maxsumaestadisticas) {
                 maxsumaestadisticas = sumaestadistica;
                 personajemaspoderoso = p;
             }
@@ -68,7 +68,4 @@ public class UtilidadesPersonaje {
         }
         return maxpersonajesPorRegion;
     }
-
-
-
 }
